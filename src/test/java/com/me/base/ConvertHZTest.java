@@ -11,7 +11,7 @@ import org.junit.Test;
  * @Version 1.0
  **/
 
-public class ConvertHZTest {等等
+public class ConvertHZTest {
 
     @Test
     public void convertTest() {
