@@ -12,54 +12,34 @@ import java.util.*;
 public class Q1006 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int a = scanner.nextInt();
-        scanner.nextLine();
-        String input = scanner.nextLine();
-        String[] inputArray = input.split(" ");
-        List<Integer> keyNumberList = new ArrayList<>();
-        List<List<Integer>> beCoveredNumberList = new ArrayList<>();
-        for (String strInput : inputArray) {
-            int intInput = Integer.parseInt(strInput);
-            keyNumberList.add(intInput);
-//            StringBuilder beCoveredNumber = new StringBuilder();
-            List<Integer> beCoveredNumber = new ArrayList<>();
-            while (intInput != 1) {
-                if (intInput % 2 == 0) {
-                    intInput = intInput / 2;
-                } else {
-                    intInput = (3 * intInput + 1) / 2;
-                }
-                beCoveredNumber.add(intInput);
-//                beCoveredNumber.append(intInput);
-//                beCoveredNumber.append(" ");
-            }
-            beCoveredNumberList.add(beCoveredNumber);
-
-        }
-
-        Iterator<Integer> iterator = keyNumberList.iterator();
-        while (iterator.hasNext()) {
-            Integer str = iterator.next();
-            for (List beCoveredNumbers : beCoveredNumberList) {
-                if (beCoveredNumbers.contains(str)) {
-//                if (beCoveredNumbers.indexOf(str) > 0) {
-                    iterator.remove();
-                    break;
-                }
-            }
-
-        }
-        Collections.sort(keyNumberList, new Comparator<Integer>() {
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                return o2.compareTo(o1);
-            }
-        });
+        int input = scanner.nextInt();
+        String strInput = String.valueOf(input);
+        int length = strInput.length();
         StringBuilder sb = new StringBuilder();
-        for (Integer i : keyNumberList) {
-            sb.append(i);
-            sb.append(" ");
+        switch (length) {
+            case 3: sb.append(add(2, strInput.charAt(0))); sb.append(add(1, strInput.charAt(1)));sb.append(add(0, strInput.charAt(2))); break;
+            case 2: sb.append(add(1, strInput.charAt(0)));sb.append(add(0, strInput.charAt(1))); break;
+            case 1: sb.append(add(0, strInput.charAt(0))); break;
         }
-        System.out.println(sb.toString().trim());
+        System.out.println(sb.toString());
+    }
+
+    /**
+     *
+     * @param flag 0：个位、1：十位、2：百位
+     * @return
+     */
+    private static String add(int flag, char count) {
+        int intCount = Integer.parseInt(String.valueOf(count));
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < intCount; i++) {
+            switch (flag) {
+                case 0 : sb.append(i + 1); break;
+                case 1 : sb.append("S"); break;
+                case 2 : sb.append("B"); break;
+                default: break;
+            }
+        }
+        return sb.toString();
     }
 }
